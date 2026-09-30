@@ -7,6 +7,17 @@ export type {
   BuyBoxProps,
 } from "./BuyBox";
 
+export {
+  BuyBoxProvider,
+  BuyBoxSection,
+} from "./BuyBoxProject";
+
+export type {
+  BuyBoxProjectConfig,
+  BuyBoxProviderProps,
+  BuyBoxSectionProps,
+} from "./BuyBoxProject";
+
 export type {
   BuyBoxColors,
   BuyBoxProduct,
