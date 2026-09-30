@@ -91,6 +91,9 @@ export interface BuyBoxProps
 function shouldShowEditor(
   mode: "auto" | boolean,
 ) {
+  /*
+   * Explicit true/false always wins.
+   */
   if (typeof mode === "boolean") {
     return mode;
   }
@@ -102,13 +105,41 @@ function shouldShowEditor(
   const host =
     window.location.hostname;
 
-  return (
+  /*
+   * Local development always gets the editor.
+   */
+  if (
     host === "localhost" ||
-    host === "127.0.0.1" ||
-    /^id-preview--.+\.lovable\.app$/.test(host) ||
-    /^project--.+-dev\.lovable\.app$/.test(host) ||
-    host.endsWith(".lovableproject.com")
-  );
+    host === "127.0.0.1"
+  ) {
+    return true;
+  }
+
+  const isLovablePreview =
+    /^id-preview--.+\.lovable\.app$/.test(
+      host,
+    ) ||
+    /^project--.+-dev\.lovable\.app$/.test(
+      host,
+    ) ||
+    host.endsWith(
+      ".lovableproject.com",
+    );
+
+  if (!isLovablePreview) {
+    return false;
+  }
+
+  /*
+   * Lovable's editor displays the preview
+   * inside an iframe.
+   *
+   * A preview URL opened directly in a normal
+   * browser tab is top-level and should behave
+   * like a customer-facing page, without the
+   * Buy Box settings controls.
+   */
+  return window.self !== window.top;
 }
 
 function storefrontConfigFromSite(

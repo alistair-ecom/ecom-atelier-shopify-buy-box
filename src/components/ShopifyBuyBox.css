@@ -70,6 +70,24 @@
   gap: 24px;
 }
 
+/*
+ * If Discount Kit produces four or more
+ * visible quantity tiers, use four desktop
+ * columns instead of wrapping the fourth
+ * card onto a second row.
+ */
+.shopify-buy-box__cards:has(
+  > .shopify-buy-box__card:nth-child(4)
+) {
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
+  gap: 16px;
+}
+
 .shopify-buy-box__card {
   position: relative;
 
@@ -894,3 +912,404 @@
     font-size: 15px;
   }
 }
+
+/* =========================================
+   V0.1.2 RESPONSIVE HARDENING
+
+   Four-tier desktop layouts stay on one row
+   whenever there is physically enough room.
+
+   These rules use the Buy Box's own container
+   width, not the browser viewport.
+========================================= */
+
+/*
+ * Prevent content from visually spilling
+ * into neighbouring cards.
+ */
+.shopify-buy-box__card {
+  overflow: hidden;
+}
+
+/*
+ * Four visible Discount Kit tiers:
+ * keep all four cards on one desktop row.
+ */
+.shopify-buy-box__cards:has(
+  > .shopify-buy-box__card:nth-child(4)
+) {
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
+  gap:
+    clamp(
+      10px,
+      1.5cqi,
+      18px
+    );
+}
+
+/*
+ * Price must never extend into another card.
+ */
+.shopify-buy-box__unit-price {
+  width: 100%;
+  max-width: 100%;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: clip;
+
+  overflow-wrap: normal;
+
+  word-break: normal;
+}
+
+.shopify-buy-box__total-price,
+.shopify-buy-box__original-price {
+  width: 100%;
+  max-width: 100%;
+}
+
+.shopify-buy-box__button {
+  max-width: 100%;
+}
+
+/*
+ * A four-card Buy Box needs slightly more
+ * compact typography below 1050px.
+ *
+ * This still remains the DESKTOP layout.
+ */
+@container buybox-inner (max-width: 1050px) {
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  ) {
+    gap: 12px;
+  }
+
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__card {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__quantity {
+    font-size:
+      clamp(
+        21px,
+        2.6cqi,
+        28px
+      );
+  }
+
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__stars {
+    font-size:
+      clamp(
+        21px,
+        2.5cqi,
+        27px
+      );
+  }
+
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__unit-price {
+    font-size:
+      clamp(
+        24px,
+        3cqi,
+        34px
+      );
+  }
+
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__total-price {
+    font-size: 15px;
+  }
+
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__original-price {
+    font-size: 14px;
+  }
+
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__button {
+    min-height: 54px;
+
+    padding:
+      8px 8px;
+
+    font-size: 18px;
+  }
+
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__trust {
+    font-size: 13px;
+  }
+}
+
+/*
+ * Small desktop Buy Boxes can still display
+ * four cards in one row at around 800px.
+ */
+@container buybox-inner (max-width: 850px) {
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  ) {
+    gap: 8px;
+  }
+
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__card {
+    padding:
+      20px 10px 20px;
+  }
+
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__image-wrap {
+    height: 170px;
+  }
+
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__quantity {
+    font-size: 20px;
+  }
+
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__stars {
+    font-size: 20px;
+
+    letter-spacing: 1px;
+  }
+
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__unit-price {
+    font-size:
+      clamp(
+        21px,
+        3cqi,
+        26px
+      );
+  }
+
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__button {
+    min-height: 48px;
+
+    padding:
+      7px 5px;
+
+    font-size: 16px;
+  }
+
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__trust {
+    font-size: 12px;
+  }
+}
+
+/*
+ * Safety fallback.
+ *
+ * If some external page constrains the Buy
+ * Box below ~720px while the browser itself
+ * is still desktop-sized, four usable cards
+ * simply cannot fit beside one another.
+ *
+ * At that point use a clean 2x2 grid rather
+ * than allowing prices/text to overlap.
+ *
+ * Once the page wrapper is fixed, normal
+ * Small/Medium/Large layouts remain 4-across.
+ */
+@container buybox-inner (max-width: 720px) {
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  ) {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+
+    gap: 12px;
+  }
+
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__unit-price {
+    font-size:
+      clamp(
+        24px,
+        5cqi,
+        32px
+      );
+  }
+}
+
+/* =========================================
+   V0.1.3 VERY NARROW DESKTOP
+
+   Browser viewport still determines whether
+   the mobile UX is used.
+
+   However, when somebody deliberately makes
+   the desktop Buy Box extremely narrow with
+   Custom Width, multiple cards can no longer
+   remain readable side-by-side.
+
+   Below 560px of actual Buy Box width, keep
+   the desktop card design but stack the cards
+   vertically.
+========================================= */
+
+@container buybox-inner (max-width: 560px) {
+  .shopify-buy-box__cards,
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  ) {
+    grid-template-columns:
+      minmax(0, 1fr);
+
+    gap: 16px;
+  }
+
+  .shopify-buy-box__card,
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__card {
+    padding:
+      24px 18px 24px;
+  }
+
+  .shopify-buy-box__quantity,
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__quantity {
+    font-size: 24px;
+  }
+
+  .shopify-buy-box__stars,
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__stars {
+    font-size: 24px;
+
+    letter-spacing: 2px;
+  }
+
+  .shopify-buy-box__image-wrap,
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__image-wrap {
+    width:
+      min(
+        100%,
+        280px
+      );
+
+    height: 220px;
+  }
+
+  .shopify-buy-box__selectors {
+    gap: 12px;
+  }
+
+  .shopify-buy-box__selector {
+    font-size: 14px;
+  }
+
+  .shopify-buy-box__selector select {
+    min-height: 48px;
+
+    padding:
+      0 44px 0 12px;
+  }
+
+  .shopify-buy-box__unit-price,
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__unit-price {
+    font-size: 32px;
+
+    white-space: normal;
+
+    overflow: visible;
+  }
+
+  .shopify-buy-box__total-price {
+    font-size: 17px;
+  }
+
+  .shopify-buy-box__original-price {
+    font-size: 15px;
+  }
+
+  .shopify-buy-box__button,
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__button {
+    width:
+      min(
+        100%,
+        260px
+      );
+
+    min-height: 58px;
+
+    font-size: 20px;
+  }
+
+  .shopify-buy-box__trust,
+  .shopify-buy-box__cards:has(
+    > .shopify-buy-box__card:nth-child(4)
+  )
+  .shopify-buy-box__trust {
+    font-size: 14px;
+  }
+}
+
