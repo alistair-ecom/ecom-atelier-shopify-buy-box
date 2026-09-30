@@ -1313,3 +1313,82 @@
   }
 }
 
+/* =========================================
+   V0.1.6 CARD-BASED PRICE SCALING
+
+   Price typography must respond to the
+   actual width of its individual desktop
+   card, not the browser viewport or the
+   overall Buy Box width.
+========================================= */
+
+/*
+ * Every desktop pricing card becomes its
+ * own inline-size query container.
+ *
+ * The surrounding grid already determines
+ * each card's width, so this does not change
+ * the card layout itself.
+ */
+.shopify-buy-box__card {
+  container-type: inline-size;
+  container-name: buybox-card;
+}
+
+/*
+ * Scale against the actual CARD width.
+ *
+ * Examples:
+ *
+ * narrow card  -> ~18-24px
+ * normal card  -> ~28-38px
+ * wide card    -> up to 46px
+ *
+ * This keeps values such as
+ * "59,42 € je Paar"
+ * on one readable line without overflowing.
+ */
+.shopify-buy-box__desktop
+.shopify-buy-box__unit-price {
+  width: 100%;
+  max-width: 100%;
+
+  font-size:
+    clamp(
+      18px,
+      12cqi,
+      46px
+    );
+
+  line-height: 1.08;
+
+  letter-spacing: -0.02em;
+
+  white-space: nowrap;
+
+  overflow: visible;
+
+  text-overflow: clip;
+
+  overflow-wrap: normal;
+
+  word-break: normal;
+}
+
+/*
+ * Slightly reduce the spacing underneath
+ * very compact price text so narrow cards
+ * remain visually balanced.
+ */
+@container buybox-card (max-width: 220px) {
+  .shopify-buy-box__unit-price {
+    line-height: 1.05;
+
+    letter-spacing: -0.025em;
+  }
+
+  .shopify-buy-box__total-price {
+    margin-top: 10px;
+  }
+}
+

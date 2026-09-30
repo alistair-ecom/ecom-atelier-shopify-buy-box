@@ -1,6 +1,6 @@
 {
   "name": "@ecom-atelier/shopify-buy-box",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Reusable Shopify + Discount Kit buy box for Ecom Atelier landing pages.",
   "type": "module",
   "sideEffects": [
