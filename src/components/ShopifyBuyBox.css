@@ -1,0 +1,896 @@
+.shopify-buy-box {
+  --buybox-section-bg: #ffffff;
+  --buybox-card-bg: #f2f2f2;
+  --buybox-selected-border: #95c11f;
+  --buybox-text: #25384a;
+  --buybox-price: #003b5c;
+  --buybox-button-bg: #95c11f;
+  --buybox-button-text: #ffffff;
+  --buybox-discount-bg: #0db7c4;
+  --buybox-discount-text: #ffffff;
+  --buybox-trust-icon: #3aaa35;
+
+  width: 100%;
+
+  background:
+    var(--buybox-section-bg);
+
+  color:
+    var(--buybox-text);
+
+  padding: 40px 20px;
+}
+
+.shopify-buy-box *,
+.shopify-buy-box *::before,
+.shopify-buy-box *::after {
+  box-sizing: border-box;
+}
+
+/*
+ * This is the ACTUAL sized component.
+ * Internal layout queries must therefore
+ * measure this element, not the outer section.
+ */
+.shopify-buy-box__inner {
+  width: 100%;
+
+  margin: 0 auto;
+
+  container-type: inline-size;
+  container-name: buybox-inner;
+}
+
+/* =========================================
+   DESKTOP / MOBILE
+   ONLY viewport width determines this.
+========================================= */
+
+.shopify-buy-box__desktop {
+  display: block;
+}
+
+.shopify-buy-box__mobile {
+  display: none;
+}
+
+/* =========================================
+   DESKTOP CARDS
+========================================= */
+
+.shopify-buy-box__cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap: 24px;
+}
+
+.shopify-buy-box__card {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  min-width: 0;
+
+  padding:
+    34px 28px 28px;
+
+  background:
+    var(--buybox-card-bg);
+
+  border:
+    4px solid transparent;
+
+  border-radius: 26px;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.shopify-buy-box__card:hover {
+  transform:
+    translateY(-2px);
+}
+
+.shopify-buy-box__card--selected {
+  border-color:
+    var(
+      --buybox-selected-border
+    );
+}
+
+.shopify-buy-box__quantity {
+  margin: 0;
+
+  text-align: center;
+
+  font-size:
+    clamp(
+      24px,
+      2vw,
+      34px
+    );
+
+  line-height: 1.15;
+}
+
+/* =========================================
+   STARS
+========================================= */
+
+.shopify-buy-box__stars {
+  margin-top: 26px;
+
+  color: #f5aa3c;
+
+  font-size: 30px;
+
+  letter-spacing: 2px;
+}
+
+/* =========================================
+   PRODUCT IMAGE
+========================================= */
+
+.shopify-buy-box__image-wrap {
+  position: relative;
+
+  width:
+    min(
+      100%,
+      360px
+    );
+
+  height: 260px;
+
+  margin-top: 22px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.shopify-buy-box__image {
+  display: block;
+
+  max-width: 100%;
+
+  max-height: 100%;
+
+  object-fit: contain;
+}
+
+/* =========================================
+   DISCOUNT BADGE
+========================================= */
+
+.shopify-buy-box__discount-badge {
+  position: absolute;
+
+  right: 2%;
+  top: 4%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  /*
+   * Scale with the actual Buy Box width.
+   *
+   * Small   ≈ 56px
+   * Medium  ≈ 70px
+   * Large   ≈ 78px
+   * Full    max 78px
+   */
+  width:
+    clamp(
+      54px,
+      7cqi,
+      78px
+    );
+
+  height:
+    clamp(
+      54px,
+      7cqi,
+      78px
+    );
+
+  padding: 6px;
+
+  border-radius: 999px;
+
+  background:
+    var(
+      --buybox-discount-bg
+    );
+
+  color:
+    var(
+      --buybox-discount-text
+    );
+
+  font-size:
+    clamp(
+      18px,
+      2.2cqi,
+      26px
+    );
+
+  font-weight: 800;
+
+  line-height: 1;
+
+  text-align: center;
+
+  overflow: hidden;
+}
+
+/*
+ * Longer Discount Kit labels such as
+ * "2+1 Gratis" use smaller text so that
+ * they fit cleanly inside the same circle.
+ */
+.shopify-buy-box__discount-badge--wide {
+  font-size:
+    clamp(
+      12px,
+      1.5cqi,
+      17px
+    );
+
+  line-height: 1.05;
+
+  padding: 7px;
+
+  white-space: normal;
+
+  text-align: center;
+}
+
+/* =========================================
+   VARIANT SELECTORS
+========================================= */
+
+/*
+ * Wide desktop:
+ * keep selectors beside each other.
+ *
+ * Size deliberately receives more room
+ * because values such as 100 x 200cm are
+ * significantly longer than Grau, Beige etc.
+ */
+.shopify-buy-box__selectors {
+  width: 100%;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  gap: 12px;
+
+  margin-top: 18px;
+}
+
+.shopify-buy-box__selector {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+
+  width: 100%;
+
+  min-width: 0;
+
+  text-align: left;
+
+  font-weight: 600;
+
+  font-size: 14px;
+}
+
+.shopify-buy-box__selector--size {
+  flex:
+    1.25 1 0;
+}
+
+.shopify-buy-box__selector--color {
+  flex:
+    1 1 0;
+}
+
+.shopify-buy-box__selector--other {
+  flex:
+    1 1 0;
+}
+
+.shopify-buy-box__selector select {
+  display: block;
+
+  width: 100%;
+
+  max-width: 100%;
+
+  min-width: 0;
+
+  min-height: 48px;
+
+  padding:
+    0 38px 0 12px;
+
+  border:
+    1px solid #cfcfcf;
+
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  color:
+    var(--buybox-text);
+
+  font: inherit;
+
+  appearance: none;
+
+  -webkit-appearance: none;
+
+  -moz-appearance: none;
+}
+
+.shopify-buy-box__selector::after {
+  content: "";
+
+  position: absolute;
+
+  right: 15px;
+
+  bottom: 20px;
+
+  width: 8px;
+
+  height: 8px;
+
+  border-right:
+    2px solid
+    var(--buybox-text);
+
+  border-bottom:
+    2px solid
+    var(--buybox-text);
+
+  transform:
+    rotate(45deg);
+
+  pointer-events: none;
+}
+
+/* =========================================
+   INTERNAL DESKTOP RESPONSIVENESS
+
+   These queries measure the actual inner
+   buy-box width.
+
+   They never activate the mobile UX.
+========================================= */
+
+@container buybox-inner (max-width: 1050px) {
+  .shopify-buy-box__cards {
+    gap: 16px;
+  }
+
+  .shopify-buy-box__card {
+    padding-left: 20px;
+
+    padding-right: 20px;
+  }
+
+  /*
+   * At this width the two dropdowns stack,
+   * but the overall design remains the
+   * 3-card desktop design.
+   */
+  .shopify-buy-box__selectors {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 11px;
+  }
+
+  .shopify-buy-box__selector {
+    width: 100%;
+  }
+
+  .shopify-buy-box__image-wrap {
+    height: 230px;
+  }
+
+  .shopify-buy-box__unit-price {
+    font-size:
+      clamp(
+        24px,
+        2.5vw,
+        36px
+      );
+  }
+}
+
+@container buybox-inner (max-width: 850px) {
+  .shopify-buy-box__cards {
+    gap: 10px;
+  }
+
+  .shopify-buy-box__card {
+    padding:
+      24px 13px 22px;
+  }
+
+  .shopify-buy-box__image-wrap {
+    height: 190px;
+  }
+
+  .shopify-buy-box__quantity {
+    font-size: 23px;
+  }
+
+  .shopify-buy-box__stars {
+    font-size: 23px;
+  }
+
+  .shopify-buy-box__selector {
+    font-size: 13px;
+  }
+
+  .shopify-buy-box__selector select {
+    padding-left: 10px;
+
+    padding-right: 34px;
+  }
+
+  .shopify-buy-box__selector::after {
+    right: 13px;
+  }
+
+  .shopify-buy-box__unit-price {
+    font-size: 24px;
+  }
+
+  .shopify-buy-box__total-price {
+    font-size: 14px;
+  }
+
+  .shopify-buy-box__original-price {
+    font-size: 13px;
+  }
+
+  .shopify-buy-box__button {
+    min-height: 52px;
+
+    font-size: 17px;
+  }
+
+  .shopify-buy-box__trust {
+    font-size: 13px;
+  }
+}
+
+/* =========================================
+   PRICING
+========================================= */
+
+.shopify-buy-box__price-area {
+  width: 100%;
+
+  min-height: 112px;
+
+  margin-top: 18px;
+
+  padding-bottom: 20px;
+
+  text-align: center;
+}
+
+.shopify-buy-box__unit-price {
+  color:
+    var(--buybox-price);
+
+  font-size:
+    clamp(
+      28px,
+      3vw,
+      46px
+    );
+
+  font-weight: 800;
+
+  line-height: 1.1;
+}
+
+.shopify-buy-box__total-price {
+  margin-top: 14px;
+
+  color:
+    var(--buybox-price);
+
+  font-size: 18px;
+}
+
+.shopify-buy-box__original-price {
+  margin-top: 2px;
+
+  color:
+    var(--buybox-text);
+
+  font-size: 17px;
+
+  opacity: 0.8;
+
+  text-decoration:
+    line-through;
+}
+
+/* =========================================
+   BUY BUTTON
+========================================= */
+
+.shopify-buy-box__button {
+  width:
+    min(
+      100%,
+      260px
+    );
+
+  min-height: 64px;
+
+  /*
+   * Push the button and the trust content
+   * underneath it toward the bottom of the
+   * desktop card.
+   *
+   * This keeps all three Buy buttons aligned
+   * even when the pricing content above them
+   * has different heights.
+   */
+  margin-top: auto;
+
+  border: 0;
+
+  border-radius: 6px;
+
+  background:
+    var(
+      --buybox-button-bg
+    );
+
+  color:
+    var(
+      --buybox-button-text
+    );
+
+  font: inherit;
+
+  font-size: 23px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.shopify-buy-box__button:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.5;
+}
+
+/* =========================================
+   TRUST LINES
+========================================= */
+
+.shopify-buy-box__trust {
+  width: 100%;
+
+  margin-top: 22px;
+
+  display: grid;
+
+  gap: 14px;
+
+  font-size: 16px;
+}
+
+.shopify-buy-box__trust > div {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  text-align: center;
+}
+
+.shopify-buy-box__trust-icon {
+  flex: 0 0 auto;
+
+  color:
+    var(--buybox-trust-icon);
+
+  font-weight: 900;
+}
+
+.shopify-buy-box__unavailable {
+  padding: 24px;
+
+  border-radius: 12px;
+
+  background: #f7f7f7;
+
+  text-align: center;
+}
+
+/* =========================================
+   MOBILE
+
+   ONLY browser viewport width triggers this.
+========================================= */
+
+@media (max-width: 900px) {
+  .shopify-buy-box {
+    padding:
+      20px 14px;
+  }
+
+  .shopify-buy-box__desktop {
+    display: none;
+  }
+
+  .shopify-buy-box__mobile {
+    display: block;
+  }
+
+  .shopify-buy-box__mobile-card {
+    width:
+      min(
+        100%,
+        520px
+      );
+
+    margin: 0 auto;
+
+    padding:
+      24px 18px 26px;
+
+    background:
+      var(--buybox-card-bg);
+
+    border-radius: 22px;
+  }
+
+  .shopify-buy-box__mobile-tier-heading {
+    margin-bottom: 14px;
+
+    text-align: center;
+
+    font-size: 21px;
+
+    font-weight: 800;
+  }
+
+  .shopify-buy-box__mobile-tier-selector {
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        3,
+        minmax(0, 1fr)
+      );
+
+    gap: 8px;
+  }
+
+  .shopify-buy-box__mobile-tier {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 0;
+
+    min-height: 70px;
+
+    padding:
+      9px 6px;
+
+    border:
+      2px solid #d8d8d8;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    color:
+      var(--buybox-text);
+
+    font: inherit;
+
+    cursor: pointer;
+  }
+
+  .shopify-buy-box__mobile-tier--selected {
+    border-color:
+      var(
+        --buybox-selected-border
+      );
+
+    border-width: 3px;
+  }
+
+  .shopify-buy-box__mobile-tier-quantity {
+    font-size: 16px;
+
+    font-weight: 800;
+
+    line-height: 1.15;
+
+    text-align: center;
+  }
+
+  .shopify-buy-box__mobile-tier-discount {
+    margin-top: 4px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+  }
+
+  .shopify-buy-box__stars {
+    margin-top: 20px;
+
+    font-size: 26px;
+  }
+
+  .shopify-buy-box__mobile-image-wrap {
+    width:
+      min(
+        100%,
+        320px
+      );
+
+    height: 230px;
+
+    margin:
+      14px auto 0;
+  }
+
+  /*
+   * Fixed mobile badge size because mobile
+   * uses one larger card rather than three
+   * compact desktop cards.
+   */
+  .shopify-buy-box__discount-badge {
+    width: 68px;
+
+    height: 68px;
+
+    right: 2%;
+
+    top: 4%;
+
+    padding: 6px;
+
+    font-size: 22px;
+  }
+
+  .shopify-buy-box__discount-badge--wide {
+    font-size: 14px;
+
+    line-height: 1.05;
+
+    padding: 7px;
+  }
+
+  /*
+   * Mobile always stacks variant selectors.
+   */
+  .shopify-buy-box__selectors {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+
+    margin-top: 14px;
+  }
+
+  .shopify-buy-box__selector {
+    font-size: 15px;
+  }
+
+  .shopify-buy-box__selector select {
+    min-height: 50px;
+
+    padding:
+      0 52px 0 14px;
+  }
+
+  .shopify-buy-box__selector::after {
+    right: 20px;
+
+    bottom: 21px;
+  }
+
+  /*
+   * Mobile only contains one visible card,
+   * so it does not need desktop card
+   * alignment spacing.
+   */
+  .shopify-buy-box__mobile-price-area {
+    min-height: 0;
+
+    margin-top: 22px;
+
+    padding-bottom: 0;
+  }
+
+  .shopify-buy-box__unit-price {
+    font-size: 32px;
+  }
+
+  .shopify-buy-box__total-price {
+    margin-top: 9px;
+
+    font-size: 17px;
+  }
+
+  .shopify-buy-box__original-price {
+    margin-top: 3px;
+
+    font-size: 16px;
+  }
+
+  .shopify-buy-box__mobile-button {
+    width: 100%;
+
+    max-width: none;
+
+    min-height: 60px;
+
+    /*
+     * Override the desktop margin-top:auto.
+     */
+    margin-top: 20px;
+
+    font-size: 21px;
+  }
+
+  .shopify-buy-box__trust {
+    margin-top: 20px;
+
+    gap: 10px;
+
+    font-size: 15px;
+  }
+}
