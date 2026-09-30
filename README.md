@@ -10,48 +10,83 @@ The package gets the Shopify storefront connection and the page-specific Buy Box
 npm install @ecom-atelier/shopify-buy-box
 ```
 
-## Basic usage
+## Recommended Lovable setup
+
+Configure the store once at app level:
+
+```tsx
+import {
+  BuyBoxProvider,
+} from "@ecom-atelier/shopify-buy-box";
+
+<BuyBoxProvider siteKey="adventure-shop">
+  <App />
+</BuyBoxProvider>
+```
+
+Then any page can add the Buy Box with:
+
+```tsx
+import {
+  BuyBoxSection,
+} from "@ecom-atelier/shopify-buy-box";
+
+<BuyBoxSection />
+```
+
+`BuyBoxSection` automatically uses the current browser pathname, so each page resolves its own central configuration by:
+
+```text
+siteKey + pagePath
+```
+
+It also defaults to a full-width landing-page section so common narrow Lovable content wrappers do not squeeze the Buy Box.
+
+For another Shopify storefront, configure that project once with a different registered site key:
+
+```tsx
+<BuyBoxProvider siteKey="ergowohl">
+  <App />
+</BuyBoxProvider>
+```
+
+The corresponding `buy_box_sites` row must already exist in the central Supabase project.
+
+## Short Lovable prompts
+
+First Buy Box in a new project:
+
+```text
+Set up the Ecom Atelier Buy Box for this project using site key "adventure-shop".
+Add the Buy Box at the main purchase point of this page.
+```
+
+Additional pages in the same project:
+
+```text
+Add the Ecom Atelier Buy Box at the main purchase point of this page.
+```
+
+## Direct usage
+
+The lower-level component remains available:
 
 ```tsx
 import {
   BuyBox,
 } from "@ecom-atelier/shopify-buy-box";
 
-import "@ecom-atelier/shopify-buy-box/style.css";
-
-export function ProductLandingPage() {
-  return (
-    <BuyBox
-      siteKey="adventure-shop"
-    />
-  );
-}
+<BuyBox siteKey="adventure-shop" />
 ```
 
-The package uses the current browser pathname automatically. A central config row therefore resolves by:
-
-```text
-siteKey + pagePath
-```
-
-For another Shopify storefront:
+## Optional section overrides
 
 ```tsx
-<BuyBox siteKey="ergowohl" />
-```
-
-The corresponding `buy_box_sites` row must already exist in the central Supabase project.
-
-## Optional props
-
-```tsx
-<BuyBox
-  siteKey="adventure-shop"
+<BuyBoxSection
   pagePath="/summer-sale"
   productHandle="fallback-product-handle"
   size="large"
-  buttonText="Jetzt kaufen"
-  editorMode="auto"
+  fullBleed={true}
 />
 ```
 
@@ -59,27 +94,11 @@ The corresponding `buy_box_sites` row must already exist in the central Supabase
 
 ## Central API URL
 
-The Ecom Atelier API URL is built in as the default. It can still be overridden:
-
-```tsx
-<BuyBox
-  siteKey="adventure-shop"
-  apiUrl="https://example.supabase.co/functions/v1/buy-box-api"
-/>
-```
+The Ecom Atelier API URL is built in as the default and is normally inherited from `BuyBoxProvider`.
 
 ## Editor
 
-With `editorMode="auto"`, the settings editor is visible on localhost and Lovable preview hosts, but hidden on normal production domains.
-
-You can also force it explicitly:
-
-```tsx
-<BuyBox
-  siteKey="adventure-shop"
-  editorMode={true}
-/>
-```
+With `editorMode="auto"`, the settings editor is visible in the embedded Lovable editor preview and on localhost, but hidden on normal customer-facing pages.
 
 The editor key is verified and writes are authorized by the central Supabase Edge Function. Never put the editor key or Supabase service-role key into this package.
 
@@ -88,7 +107,9 @@ The editor key is verified and writes are authorized by the central Supabase Edg
 ```text
 Lovable / React project
         ↓
-<BuyBox siteKey="..." />
+<BuyBoxProvider siteKey="..." />
+        ↓
+<BuyBoxSection />
         ↓
 Central Supabase Buy Box API
         ↓
@@ -99,16 +120,4 @@ Shopify Storefront API
 Discount Kit metadata + Shopify Cart pricing
         ↓
 Shopify checkout
-```
-
-## Publishing
-
-This package is configured as a public scoped npm package. Before first publish, make sure the npm account/organization owns the `@ecom-atelier` scope.
-
-```bash
-npm install
-npm run typecheck
-npm run build
-npm login
-npm publish
 ```
