@@ -1,6 +1,6 @@
 {
   "name": "@ecom-atelier/shopify-buy-box",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Reusable Shopify + Discount Kit buy box for Ecom Atelier landing pages.",
   "type": "module",
   "sideEffects": [
@@ -43,5 +43,9 @@
     "lovable",
     "react"
   ],
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alistair-ecom/ecom-atelier-shopify-buy-box"
+  }
 }
