@@ -1392,3 +1392,39 @@
   }
 }
 
+/* =========================================
+   ECOM BUY BOX SECTION
+
+   Landing-page wrapper used by BuyBoxSection.
+   It can escape common narrow page containers
+   while keeping the actual Buy Box centered
+   and controlled by its own width setting.
+========================================= */
+
+.ecom-buy-box-section {
+  width: 100%;
+  position: relative;
+}
+
+.ecom-buy-box-section--full-bleed {
+  width: 100vw;
+  max-width: 100vw;
+
+  margin-left:
+    calc(50% - 50vw);
+  margin-right:
+    calc(50% - 50vw);
+}
+
+.ecom-buy-box-section__error {
+  width: 100%;
+  padding: 20px;
+
+  font-family:
+    system-ui,
+    sans-serif;
+
+  font-size: 14px;
+
+  text-align: center;
+}
