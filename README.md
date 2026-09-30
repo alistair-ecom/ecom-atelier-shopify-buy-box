@@ -19,6 +19,8 @@ import {
   BuyBoxProvider,
 } from "@ecom-atelier/shopify-buy-box";
 
+import "@ecom-atelier/shopify-buy-box/style.css";
+
 <BuyBoxProvider siteKey="adventure-shop">
   <App />
 </BuyBoxProvider>
@@ -57,9 +59,10 @@ The corresponding `buy_box_sites` row must already exist in the central Supabase
 First Buy Box in a new project:
 
 ```text
-Set up the Ecom Atelier Buy Box for this project using site key "adventure-shop".
-Add the Buy Box at the main purchase point of this page.
+Install and set up @ecom-atelier/shopify-buy-box for this project using site key "adventure-shop". Follow the package's recommended Lovable setup, and add the Buy Box at the main purchase point of this page.
 ```
+
+That one-time setup should install the package, import its stylesheet, wrap the app in `BuyBoxProvider`, and insert `BuyBoxSection` on the current page.
 
 Additional pages in the same project:
 
